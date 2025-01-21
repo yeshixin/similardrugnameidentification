@@ -9,6 +9,7 @@ body {
     background-color: #000000; /* 環境為黑色 */
     font-family: Arial, sans-serif;
     color: #FFFFFF;
+    font-size: 26pt; /* 設定全域字體大小 */
 }
 
 .screen {
@@ -23,13 +24,13 @@ body {
 
 .rectangle {
     width: 800px;
-    height: 400px;
+    height: 85.8pt;
     background-color: #FFFFFF; /* 白色底色 */
     display: flex;
     justify-content: center;
     align-items: center;
     color: #000000;
-    font-size: 50px;
+    font-size: 26pt;/* 框架中文字大小 */
     text-align: center;
     position: relative;
 }
@@ -37,7 +38,7 @@ body {
 .next-btn {
     margin-top: 20px;
     padding: 10px 20px;
-    font-size: 24px;
+    font-size: 20pt;/*按鈕文字*/
     cursor: pointer;
     background-color: #FFFFFF;
     color: #000000;
@@ -52,27 +53,44 @@ body {
 
 /* 十字準芯 (中央的+) */
 .crosshair {
-    font-size: 100px; /* 調整十字準芯大小 */
-    font-weight: bold;
-    color: #000000; /* 黑色 */
+    font-size: 26pt; /* 字體大小 */
+    font-weight: bold; /* 粗體 */
+    color: #ffffff; /* 紅色 */
+    position: absolute; /* 絕對定位 */
+    top: 50%; /* 垂直方向置中 */
+    left: 50%; /* 水平方向置中 */
+    transform: translate(-50%, -50%); /* 以自身尺寸為基準，中心對齊 */
     text-align: center;
+}
+
+
+/* 黑色十字準芯 (START畫面) */
+.black-crosshair {
+    color: #000000;
 }
 
 /* 第二畫面 START 的文字 */
 .start-text {
-    position: absolute;
-    top: 60%; /* 向下移動 60px */
-    font-size: 40px;
-    color: #000000; /* 黑色 */
+    font-size: 26pt; /* 字體大小 */
+    color: #000000; /* 紅色 */
+    position: absolute; /* 絕對定位 */
+    top: 40%; /* 垂直方向置中 */
+    left: 50%; /* 水平方向置中 */
+    transform: translate(-50%, -50%); /* 以自身尺寸為基準，中心對齊 */
+    text-align: center;
 }
 
 /* 緩衝畫面的文字 */
 #buffer-text {
-    font-size: 40px; /* 可調整文字大小 */
+    font-size: 26pt; /* 可調整文字大小 */
 }
 
 /* 問題畫面的中心區塊 */
 #center-rectangle {
+    width: 655px;
+    height: 42.9pt;
+    font-size: 26pt;
+    color: #000000;
     background-color: #CCCCCC; /* 問題畫面為灰色底色 */
 }
 
@@ -80,15 +98,15 @@ body {
 .options-container {
     display: flex;
     justify-content: center;
-    gap: 50px; /* 控制選項之間的距離 */
+    gap: 55px; /* 控制選項之間的距離 */
     align-items: center;
 }
 
 /* 選項按鈕 */
 .option-btn {
-    width: 600px;
-    height: 300px;
-    font-size: 30px;
+    width: 300px;
+    height: 42.9pt;
+    font-size: 26pt;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
