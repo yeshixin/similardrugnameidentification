@@ -1,12 +1,9 @@
 let questions = [];
 let currentQuestionIndex = 0;
 let startTime, questionStartTime;
-let endTime;
-let responseTimes = [];
 let results = [];
-let timer; // 用於作答時間限制
+let timer;
 
-// DOM 元素選取
 const fileUploadScreen = document.getElementById('file-upload');
 const startScreen = document.getElementById('start-screen');
 const bufferScreen = document.getElementById('buffer-screen');
@@ -15,8 +12,8 @@ const optionsScreen = document.getElementById('options-screen');
 const questionText = document.getElementById('question-text');
 const option1 = document.getElementById('option1');
 const option2 = document.getElementById('option2');
+const saveButton = document.getElementById('save-button');
 
-// 第一畫面：載入 Excel 檔案
 document.getElementById('file-input').addEventListener('change', (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -42,14 +39,12 @@ document.getElementById('file-input').addEventListener('change', (event) => {
     reader.readAsArrayBuffer(file);
 });
 
-// 點擊 NEXT 進入第二畫面
 document.getElementById('next-button').addEventListener('click', () => {
-    startTime = Date.now(); // 測驗開始的總時間
+    startTime = Date.now();
     fileUploadScreen.style.display = 'none';
     startScreen.style.display = 'flex';
 });
 
-// 點擊 START 或按下 Enter 進入緩衝畫面
 startScreen.addEventListener('click', moveToBufferScreen);
 document.addEventListener('keydown', (event) => {
     if (startScreen.style.display === 'flex' && event.key === 'Enter') {
@@ -67,12 +62,10 @@ function moveToBufferScreen() {
     }, 2000);
 }
 
-// 啟動測驗
 function startTest() {
     loadNextQuestion();
 }
 
-// 載入下一題
 function loadNextQuestion() {
     if (currentQuestionIndex >= questions.length) {
         return showResults();
@@ -90,11 +83,9 @@ function loadNextQuestion() {
     }, 2000);
 }
 
-// 顯示選項畫面
 function showOptions(currentQuestion) {
     option1.style.backgroundColor = currentQuestion.backgroundColor;
     option2.style.backgroundColor = currentQuestion.backgroundColor;
-
     option1.style.color = currentQuestion.textColor;
     option2.style.color = currentQuestion.textColor;
 
@@ -105,13 +96,12 @@ function showOptions(currentQuestion) {
 
     timer = setTimeout(() => {
         handleAnswer(currentQuestion, "未作答");
-    }, 10000); // 10秒計時
+    }, 10000);
 
     option1.onclick = () => handleAnswer(currentQuestion, option1.textContent);
     option2.onclick = () => handleAnswer(currentQuestion, option2.textContent);
 }
 
-// 按鍵處理 (左鍵、右鍵)
 document.addEventListener('keydown', (event) => {
     if (optionsScreen.style.display === 'flex') {
         if (event.key === 'ArrowLeft') {
@@ -122,9 +112,8 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-// 處理回答
 function handleAnswer(currentQuestion, selectedOption) {
-    clearTimeout(timer); // 清除計時器
+    clearTimeout(timer);
     const reactionTime = selectedOption === "未作答" ? "未作答" : (Date.now() - questionStartTime) / 1000;
 
     results.push({
@@ -142,11 +131,8 @@ function handleAnswer(currentQuestion, selectedOption) {
     loadNextQuestion();
 }
 
-// 顯示結果並匯出 Excel
 function showResults() {
-    const totalTime = (Date.now() - startTime) / 1000; // 總時間
-    console.log('測驗結果:', results);
-
+    const totalTime = (Date.now() - startTime) / 1000;
     results.push({ order: "總時間", totalTime: `${totalTime}s` });
 
     const worksheet = XLSX.utils.json_to_sheet(results);
@@ -154,4 +140,18 @@ function showResults() {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Results");
 
     XLSX.writeFile(workbook, "test_results.xlsx");
+}
+
+saveButton.addEventListener('click', saveProgress);
+
+function saveProgress() {
+    const now = new Date();
+    const timestamp = now.toISOString().replace(/[:.]/g, '-');
+    const filename = `progress_${timestamp}.xlsx`;
+
+    const worksheet = XLSX.utils.json_to_sheet(results);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Progress");
+
+    XLSX.writeFile(workbook, filename);
 }

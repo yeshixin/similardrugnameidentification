@@ -1,4 +1,3 @@
-/* 全域設定 */
 body {
     margin: 0;
     padding: 0;
@@ -6,10 +5,10 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #000000; /* 環境為黑色 */
+    background-color: #000000;
     font-family: Arial, sans-serif;
     color: #FFFFFF;
-    font-size: 26pt; /* 設定全域字體大小 */
+    font-size: 26pt;
 }
 
 .screen {
@@ -25,12 +24,12 @@ body {
 .rectangle {
     width: 800px;
     height: 85.8pt;
-    background-color: #FFFFFF; /* 白色底色 */
+    background-color: #FFFFFF;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #000000;
-    font-size: 26pt;/* 框架中文字大小 */
+    font-size: 26pt;
     text-align: center;
     position: relative;
 }
@@ -38,7 +37,7 @@ body {
 .next-btn {
     margin-top: 20px;
     padding: 10px 20px;
-    font-size: 20pt;/*按鈕文字*/
+    font-size: 20pt;
     cursor: pointer;
     background-color: #FFFFFF;
     color: #000000;
@@ -51,58 +50,50 @@ body {
     background-color: #ddd;
 }
 
-/* 十字準芯 (中央的+) */
 .crosshair {
-    font-size: 26pt; /* 字體大小 */
-    font-weight: bold; /* 粗體 */
-    color: #ffffff; /* 紅色 */
-    position: absolute; /* 絕對定位 */
-    top: 50%; /* 垂直方向置中 */
-    left: 50%; /* 水平方向置中 */
-    transform: translate(-50%, -50%); /* 以自身尺寸為基準，中心對齊 */
+    font-size: 26pt;
+    font-weight: bold;
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
 }
 
-
-/* 黑色十字準芯 (START畫面) */
 .black-crosshair {
     color: #000000;
 }
 
-/* 第二畫面 START 的文字 */
 .start-text {
-    font-size: 26pt; /* 字體大小 */
-    color: #000000; /* 紅色 */
-    position: absolute; /* 絕對定位 */
-    top: 40%; /* 垂直方向置中 */
-    left: 50%; /* 水平方向置中 */
-    transform: translate(-50%, -50%); /* 以自身尺寸為基準，中心對齊 */
+    font-size: 26pt;
+    color: #000000;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
 }
 
-/* 緩衝畫面的文字 */
 #buffer-text {
-    font-size: 26pt; /* 可調整文字大小 */
+    font-size: 26pt;
 }
 
-/* 問題畫面的中心區塊 */
 #center-rectangle {
     width: 655px;
     height: 42.9pt;
     font-size: 26pt;
     color: #000000;
-    background-color: #CCCCCC; /* 問題畫面為灰色底色 */
+    background-color: #CCCCCC;
 }
 
-/* 選項容器 */
 .options-container {
     display: flex;
     justify-content: center;
-    gap: 55px; /* 控制選項之間的距離 */
+    gap: 55px;
     align-items: center;
 }
 
-/* 選項按鈕 */
 .option-btn {
     width: 300px;
     height: 42.9pt;
@@ -114,4 +105,13 @@ body {
 
 .option-btn:hover {
     background-color: #ddd;
+}
+
+/* 儲存進度按鈕 - 小型化並置底 */
+#save-button {
+    position: absolute;
+    bottom: 30px; /* 距離畫面底部的距離 */
+    font-size: 15pt; /* 原本是20pt，現在50% */
+    padding: 10px 20px; /* 原本是10px 20px */
+    transform: scale(0.5); /* 整體縮小一半 */
 }
